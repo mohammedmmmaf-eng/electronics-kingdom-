@@ -1,988 +1,1494 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Electronics Kingdom 👑</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Tahoma, sans-serif;
-      background: #f5f6f8;
-      color: #111827;
-    }
-
-    :root {
-      --dark: #07111d;
-      --dark2: #101a28;
-      --gold: #f5aa13;
-      --gold2: #ffbd25;
-      --white: #ffffff;
-      --gray: #6b7280;
-    }
-
-    /* ===== TOP BAR ===== */
-
-    .topbar {
-      background: var(--dark);
-      color: white;
-      padding: 12px 6%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 14px;
-    }
-
-    .topbar span {
-      margin-left: 18px;
-    }
-
-    /* ===== HEADER ===== */
-
-    header {
-      background: var(--dark);
-      color: white;
-      padding: 25px 6% 20px;
-    }
-
-    .header-main {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-    }
-
-    .logo {
-      font-size: 32px;
-      font-weight: 900;
-      line-height: 1.1;
-    }
-
-    .logo span {
-      color: var(--gold);
-      display: block;
-    }
-
-    .cart {
-      font-size: 20px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .cart-number {
-      color: var(--gold);
-      font-weight: bold;
-      margin-left: 7px;
-    }
-
-    /* ===== SEARCH ===== */
-
-    .search {
-      margin-top: 25px;
-      display: flex;
-      height: 64px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .search input {
-      flex: 1;
-      border: none;
-      outline: none;
-      border-radius: 0 12px 12px 0;
-      padding: 0 25px;
-      font-size: 18px;
-      direction: rtl;
-    }
-
-    .search button {
-      width: 80px;
-      border: none;
-      background: var(--gold);
-      color: #07111d;
-      font-size: 25px;
-      border-radius: 12px 0 0 12px;
-      cursor: pointer;
-    }
-
-    /* ===== NAV ===== */
-
-    nav {
-      background: var(--dark);
-      display: flex;
-      justify-content: center;
-      gap: 55px;
-      padding: 12px 5%;
-      color: white;
-      font-weight: bold;
-      font-size: 17px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      transition: .2s;
-    }
-
-    nav a:hover,
-    nav a.active {
-      color: var(--gold);
-    }
-
-    /* ===== HERO ===== */
-
-    .hero {
-      max-width: 1200px;
-      margin: 35px auto;
-      padding: 65px 55px;
-      border-radius: 30px;
-      background:
-        radial-gradient(circle at left, #202938, transparent 45%),
-        linear-gradient(135deg, #111827, #07111d);
-      color: white;
-      min-height: 430px;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background: rgba(245,170,19,.06);
-      left: -120px;
-      top: 20px;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 720px;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-      line-height: 1.3;
-    }
-
-    .hero h1 span {
-      color: var(--gold);
-    }
-
-    .hero p {
-      font-size: 20px;
-      line-height: 2;
-      color: #d1d5db;
-      margin-bottom: 25px;
-    }
-
-    .hero button {
-      border: none;
-      background: var(--gold);
-      padding: 17px 35px;
-      border-radius: 12px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      color: var(--dark);
-    }
-
-    .hero button:hover {
-      background: var(--gold2);
-      transform: translateY(-2px);
-    }
-
-    /* ===== FEATURES ===== */
-
-    .features {
-      max-width: 1200px;
-      margin: 0 auto 45px;
-      background: var(--dark);
-      color: white;
-      border-radius: 25px;
-      padding: 30px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .feature {
-      text-align: center;
-      padding: 15px;
-    }
-
-    .feature .icon {
-      font-size: 35px;
-      margin-bottom: 10px;
-    }
-
-    .feature h3 {
-      color: var(--gold);
-      margin-bottom: 8px;
-      font-size: 19px;
-    }
-
-    .feature p {
-      color: #e5e7eb;
-    }
-
-    /* ===== SECTION ===== */
-
-    .section {
-      max-width: 1200px;
-      margin: 70px auto;
-      padding: 0 20px;
-    }
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-
-    .section-title h2 {
-      font-size: 32px;
-    }
-
-    .section-title h2 span {
-      color: var(--gold);
-    }
-
-    .show-all {
-      color: var(--dark);
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    /* ===== PRODUCTS ===== */
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-
-    .product {
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 7px 25px rgba(0,0,0,.08);
-      transition: .25s;
-    }
-
-    .product:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 30px rgba(0,0,0,.13);
-    }
-
-    .product-image {
-      height: 210px;
-      background: #f3f4f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      padding: 15px;
-    }
-
-    .product-info {
-      padding: 18px;
-    }
-
-    .product-info h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .price {
-      color: var(--gold);
-      font-size: 21px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .add-cart {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      background: var(--dark);
-      color: white;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .add-cart:hover {
-      background: var(--gold);
-      color: var(--dark);
-    }
-
-    /* ===== CATEGORIES ===== */
-
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .category {
-      background: var(--dark);
-      color: white;
-      border-radius: 20px;
-      padding: 30px;
-      text-align: center;
-      cursor: pointer;
-      transition: .2s;
-    }
-
-    .category:hover {
-      transform: translateY(-5px);
-    }
-
-    .category .icon {
-      font-size: 45px;
-      margin-bottom: 12px;
-    }
-
-    .category h3 {
-      color: var(--gold);
-    }
-
-    /* ===== FOOTER ===== */
-
-    footer {
-      background: var(--dark);
-      color: white;
-      margin-top: 80px;
-      padding: 55px 6% 25px;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 50px;
-    }
-
-    footer h2 {
-      font-size: 30px;
-      margin-bottom: 15px;
-    }
-
-    footer h2 span {
-      color: var(--gold);
-    }
-
-    footer p {
-      color: #d1d5db;
-      line-height: 2;
-    }
-
-    footer h3 {
-      color: var(--gold);
-      margin-bottom: 15px;
-    }
-
-    footer ul {
-      list-style: none;
-      line-height: 2;
-    }
-
-    footer li {
-      color: #ddd;
-    }
-
-    .copyright {
-      text-align: center;
-      border-top: 1px solid #293241;
-      margin-top: 40px;
-      padding-top: 20px;
-      color: var(--gold);
-    }
-
-    /* ===== MOBILE ===== */
-
-    @media (max-width: 900px) {
-
-      .topbar {
-        font-size: 12px;
-      }
-
-      .header-main {
-        flex-direction: row;
-      }
-
-      .logo {
-        font-size: 27px;
-      }
-
-      nav {
-        gap: 20px;
-        overflow-x: auto;
-        justify-content: flex-start;
-        white-space: nowrap;
-        padding: 15px 20px;
-      }
-
-      .hero {
-        margin: 20px;
-        padding: 45px 25px;
-        min-height: 400px;
-      }
-
-      .hero h1 {
-        font-size: 36px;
-      }
-
-      .hero p {
-        font-size: 17px;
-      }
-
-      .features {
-        margin: 20px;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .products {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .categories {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 550px) {
-
-      .topbar {
-        display: none;
-      }
-
-      header {
-        padding: 22px 18px;
-      }
-
-      .logo {
-        font-size: 24px;
-      }
-
-      .cart {
-        font-size: 17px;
-      }
-
-      .search {
-        height: 55px;
-      }
-
-      .search input {
-        font-size: 15px;
-      }
-
-      .search button {
-        width: 65px;
-      }
-
-      .hero {
-        margin: 18px;
-        border-radius: 25px;
-        padding: 35px 22px;
-      }
-
-      .hero h1 {
-        font-size: 31px;
-      }
-
-      .hero p {
-        font-size: 16px;
-      }
-
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 15px;
-      }
-
-      .feature {
-        padding: 10px 5px;
-      }
-
-      .feature h3 {
-        font-size: 16px;
-      }
-
-      .feature p {
-        font-size: 13px;
-      }
-
-      .section {
-        margin: 50px auto;
-      }
-
-      .section-title h2 {
-        font-size: 25px;
-      }
-
-      .products {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      .product-image {
-        height: 150px;
-      }
-
-      .product-info {
-        padding: 12px;
-      }
-
-      .product-info h3 {
-        font-size: 15px;
-      }
-
-      .price {
-        font-size: 17px;
-      }
-
-      .categories {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      .category {
-        padding: 20px 10px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electronics Kingdom 👑</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+--dark:#07111d;
+--dark2:#101a28;
+--gold:#f5aa13;
+--gold2:#ffbd25;
+}
+
+body{
+font-family:Arial,Tahoma,sans-serif;
+background:#f5f6f8;
+color:#111827;
+}
+
+.topbar{
+background:var(--dark);
+color:#fff;
+padding:12px 6%;
+display:flex;
+justify-content:space-between;
+font-size:14px
+}
+
+.topbar span{margin-left:18px}
+
+header{
+background:var(--dark);
+color:#fff;
+padding:25px 6% 20px
+}
+
+.header-main{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:25px
+}
+
+.logo{
+font-size:32px;
+font-weight:900;
+line-height:1.1
+}
+
+.logo span{
+color:var(--gold);
+display:block
+}
+
+.cart{
+font-size:20px;
+cursor:pointer;
+white-space:nowrap;
+transition:.2s
+}
+
+.cart:hover{
+color:var(--gold);
+transform:scale(1.05)
+}
+
+.cart-number{
+color:var(--gold);
+font-weight:bold;
+margin-left:7px
+}
+
+.search{
+margin-top:25px;
+display:flex;
+height:64px;
+max-width:900px;
+margin-left:auto;
+margin-right:auto;
+position:relative
+}
+
+.search input{
+flex:1;
+border:none;
+outline:none;
+border-radius:0 12px 12px 0;
+padding:0 25px;
+font-size:18px;
+direction:rtl
+}
+
+.search button{
+width:80px;
+border:none;
+background:var(--gold);
+color:#07111d;
+font-size:25px;
+border-radius:12px 0 0 12px;
+cursor:pointer
+}
+
+.search-results{
+position:absolute;
+top:70px;
+right:0;
+left:80px;
+background:#fff;
+color:#111;
+border-radius:12px;
+box-shadow:0 10px 30px rgba(0,0,0,.18);
+z-index:1000;
+display:none;
+overflow:hidden
+}
+
+.search-item{
+padding:15px 20px;
+cursor:pointer;
+border-bottom:1px solid #eee;
+display:flex;
+justify-content:space-between
+}
+
+.search-item:hover{background:#f5f5f5}
+
+.search-price{
+color:#d99000;
+font-weight:bold
+}
+
+nav{
+background:var(--dark);
+display:flex;
+justify-content:center;
+gap:55px;
+padding:12px 5%;
+color:#fff;
+font-weight:bold;
+font-size:17px
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+transition:.2s
+}
+
+nav a:hover,
+nav a.active{color:var(--gold)}
+
+.hero{
+max-width:1200px;
+margin:35px auto;
+padding:65px 55px;
+border-radius:30px;
+background:
+radial-gradient(circle at left,#202938,transparent 45%),
+linear-gradient(135deg,#111827,#07111d);
+color:#fff;
+min-height:430px;
+display:flex;
+align-items:center;
+position:relative;
+overflow:hidden
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:400px;
+height:400px;
+border-radius:50%;
+background:rgba(245,170,19,.06);
+left:-120px;
+top:20px
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+max-width:720px
+}
+
+.hero h1{
+font-size:48px;
+margin-bottom:20px;
+line-height:1.3
+}
+
+.hero h1 span{color:var(--gold)}
+
+.hero p{
+font-size:20px;
+line-height:2;
+color:#d1d5db;
+margin-bottom:25px
+}
+
+.hero button{
+border:none;
+background:var(--gold);
+padding:17px 35px;
+border-radius:12px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+color:var(--dark)
+}
+
+.hero button:hover{
+background:var(--gold2);
+transform:translateY(-2px)
+}
+
+.features{
+max-width:1200px;
+margin:0 auto 45px;
+background:var(--dark);
+color:#fff;
+border-radius:25px;
+padding:30px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px
+}
+
+.feature{
+text-align:center;
+padding:15px
+}
+
+.feature .icon{
+font-size:35px;
+margin-bottom:10px
+}
+
+.feature h3{
+color:var(--gold);
+margin-bottom:8px;
+font-size:19px
+}
+
+.feature p{color:#e5e7eb}
+
+.section{
+max-width:1200px;
+margin:70px auto;
+padding:0 20px
+}
+
+.section-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px
+}
+
+.section-title h2{font-size:32px}
+
+.section-title h2 span{color:var(--gold)}
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:22px
+}
+
+.product{
+background:#fff;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 7px 25px rgba(0,0,0,.08);
+transition:.25s
+}
+
+.product:hover{
+transform:translateY(-6px);
+box-shadow:0 12px 30px rgba(0,0,0,.13)
+}
+
+.product-image{
+height:210px;
+background:#f3f4f6;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden
+}
+
+.product-image img{
+width:100%;
+height:100%;
+object-fit:contain;
+padding:15px
+}
+
+.product-info{padding:18px}
+
+.product-info h3{
+font-size:18px;
+margin-bottom:10px
+}
+
+.price{
+color:var(--gold);
+font-size:21px;
+font-weight:bold;
+margin-bottom:15px
+}
+
+.add-cart{
+width:100%;
+padding:12px;
+border:none;
+background:var(--dark);
+color:#fff;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer
+}
+
+.add-cart:hover{
+background:var(--gold);
+color:var(--dark)
+}
+
+.categories{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px
+}
+
+.category{
+background:var(--dark);
+color:#fff;
+border-radius:20px;
+padding:30px;
+text-align:center;
+cursor:pointer;
+transition:.2s
+}
+
+.category:hover{
+transform:translateY(-5px);
+background:#101d2d
+}
+
+.category .icon{
+font-size:45px;
+margin-bottom:12px
+}
+
+.category h3{color:var(--gold)}
+
+footer{
+background:var(--dark);
+color:#fff;
+margin-top:80px;
+padding:55px 6% 25px
+}
+
+.footer-content{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:2fr 1fr 1fr;
+gap:50px
+}
+
+footer h2{
+font-size:30px;
+margin-bottom:15px
+}
+
+footer h2 span{color:var(--gold)}
+
+footer p{
+color:#d1d5db;
+line-height:2
+}
+
+footer h3{
+color:var(--gold);
+margin-bottom:15px
+}
+
+footer ul{
+list-style:none;
+line-height:2
+}
+
+footer li{color:#ddd}
+
+.contact-link{
+color:#fff;
+text-decoration:none
+}
+
+.contact-link:hover{color:var(--gold)}
+
+.whatsapp-link{
+color:#25D366;
+font-weight:bold
+}
+
+/* CART */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+z-index:5000;
+align-items:center;
+justify-content:center;
+padding:20px
+}
+
+.modal-box{
+background:#fff;
+width:100%;
+max-width:650px;
+max-height:90vh;
+overflow-y:auto;
+border-radius:22px;
+padding:25px;
+position:relative
+}
+
+.close{
+position:absolute;
+left:20px;
+top:15px;
+font-size:28px;
+cursor:pointer;
+color:#555
+}
+
+.modal-title{
+font-size:28px;
+margin-bottom:20px
+}
+
+.cart-item{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+border-bottom:1px solid #eee;
+padding:15px 0
+}
+
+.cart-item-info{flex:1}
+
+.cart-item h4{margin-bottom:7px}
+
+.cart-item-price{
+color:#c88700;
+font-weight:bold
+}
+
+.quantity{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.quantity button{
+border:none;
+background:var(--dark);
+color:#fff;
+width:30px;
+height:30px;
+border-radius:7px;
+cursor:pointer
+}
+
+.remove{
+border:none;
+background:#ef4444;
+color:#fff;
+padding:7px 10px;
+border-radius:7px;
+cursor:pointer
+}
+
+.cart-total{
+font-size:22px;
+font-weight:bold;
+margin:20px 0
+}
+
+.checkout-btn{
+width:100%;
+border:none;
+background:var(--gold);
+padding:15px;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer
+}
+
+.checkout-btn:hover{background:var(--gold2)}
+
+.form-group{margin-bottom:15px}
+
+.form-group label{
+display:block;
+font-weight:bold;
+margin-bottom:7px
+}
+
+.form-group input,
+.form-group textarea{
+width:100%;
+padding:13px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+outline:none;
+font-family:inherit
+}
+
+.form-group textarea{
+height:90px;
+resize:vertical
+}
+
+.empty{
+text-align:center;
+padding:40px 10px;
+color:#777;
+font-size:18px
+}
+
+.whatsapp-float{
+position:fixed;
+bottom:22px;
+left:22px;
+width:58px;
+height:58px;
+border-radius:50%;
+background:#25D366;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+text-decoration:none;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+z-index:4000
+}
+
+.no-results{
+display:none;
+text-align:center;
+padding:30px;
+font-size:18px;
+color:#777
+}
+
+@media(max-width:900px){
+
+.logo{font-size:27px}
+
+nav{
+gap:20px;
+overflow-x:auto;
+justify-content:flex-start;
+white-space:nowrap;
+padding:15px 20px
+}
+
+.hero{
+margin:20px;
+padding:45px 25px;
+min-height:400px
+}
+
+.hero h1{font-size:36px}
+
+.hero p{font-size:17px}
+
+.features{
+margin:20px;
+grid-template-columns:repeat(2,1fr)
+}
+
+.products{grid-template-columns:repeat(2,1fr)}
+
+.categories{grid-template-columns:repeat(2,1fr)}
+
+.footer-content{grid-template-columns:1fr}
+
+}
+
+@media(max-width:550px){
+
+.topbar{display:none}
+
+header{padding:22px 18px}
+
+.logo{font-size:24px}
+
+.cart{font-size:17px}
+
+.search{height:55px}
+
+.search input{font-size:15px}
+
+.search button{width:65px}
+
+.search-results{
+top:61px;
+left:65px
+}
+
+.hero{
+margin:18px;
+border-radius:25px;
+padding:35px 22px
+}
+
+.hero h1{font-size:31px}
+
+.hero p{font-size:16px}
+
+.features{
+grid-template-columns:repeat(2,1fr);
+padding:15px
+}
+
+.section{margin:50px auto}
+
+.section-title h2{font-size:25px}
+
+.products{
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+.product-image{height:150px}
+
+.product-info{padding:12px}
+
+.product-info h3{font-size:15px}
+
+.price{font-size:17px}
+
+.categories{
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+.category{padding:20px 10px}
+
+}
+</style>
 </head>
 
 <body>
 
-  <!-- TOP BAR -->
+<div class="topbar">
+<div>
+<span>🚚 توصيل سريع لجميع المناطق</span>
+</div>
 
-  <div class="topbar">
-    <div>
-      <span>🚚 توصيل سريع لجميع المناطق</span>
-    </div>
+<div>
+<span>🎧 مساعدة</span>
+<span>📦 متابعة الطلب</span>
+</div>
+</div>
 
-    <div>
-      <span>🎧 مساعدة</span>
-      <span>📦 تتبع الطلب</span>
-    </div>
-  </div>
+<header>
 
+<div class="header-main">
 
-  <!-- HEADER -->
+<div class="cart" onclick="openCart()">
+🛒 السلة
+<span class="cart-number" id="cartCount">0</span>
+</div>
 
-  <header>
+<div class="logo">
+ELECTRONICS 👑
+<span>KINGDOM</span>
+</div>
 
-    <div class="header-main">
+</div>
 
-      <div class="cart">
-        🛒
-        <span class="cart-number" id="cartCount">0</span>
-      </div>
+<div class="search">
 
-      <div class="logo">
-        ELECTRONICS 👑
-        <span>KINGDOM</span>
-      </div>
+<button onclick="searchProducts()">⌕</button>
 
-    </div>
+<input
+type="text"
+id="searchInput"
+placeholder="ابحث عن منتج..."
+autocomplete="off"
+oninput="searchProducts()"
+>
 
+<div id="searchResults" class="search-results"></div>
 
-    <!-- SEARCH -->
+</div>
 
-    <div class="search">
-      <button onclick="searchProducts()">⌕</button>
+</header>
 
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="ابحث عن منتج..."
-        onkeyup="searchProducts()"
-      >
-    </div>
+<nav>
 
-  </header>
+<a href="#home" class="active">الرئيسية</a>
+<a href="#products">جميع المنتجات</a>
+<a href="#categories">الأقسام</a>
+<a href="#offers">العروض</a>
+<a href="#footer">تواصل معنا</a>
 
+</nav>
 
-  <!-- NAVIGATION -->
+<section class="hero" id="home">
 
-  <nav>
+<div class="hero-content">
 
-    <a href="#" class="active">الرئيسية</a>
-    <a href="#products">جميع المنتجات</a>
-    <a href="#categories">الأقسام</a>
-    <a href="#offers">العروض</a>
-    <a href="#footer">الماركات</a>
+<h1>
+كل ما تحتاجه
+<br>
+<span>لمنزل أذكى وأفضل</span>
+</h1>
 
-  </nav>
+<p>
+أحدث الأجهزة الكهربائية المنزلية
+بأسعار منافسة وجودة عالية.
+اختر منتجك وأرسل طلبك مباشرة.
+</p>
 
+<button onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+تسوق الآن ←
+</button>
 
-  <!-- HERO -->
+</div>
 
-  <section class="hero">
+</section>
 
-    <div class="hero-content">
+<section class="features">
 
-      <h1>
-        كل ما تحتاجه
-        <br>
-        <span>لمنزل أذكى وأفضل</span>
-      </h1>
+<div class="feature">
+<div class="icon">🛡️</div>
+<h3>منتجات أصلية</h3>
+<p>ضمان على المنتجات</p>
+</div>
 
-      <p>
-        أحدث الأجهزة الكهربائية المنزلية
-        بأسعار منافسة وجودة عالية.
-        هذه نسخة تجريبية من متجر
-        Electronics Kingdom.
-      </p>
+<div class="feature">
+<div class="icon">🔧</div>
+<h3>تركيب مجاني</h3>
+<p>حسب المنتج</p>
+</div>
 
-      <button onclick="document.getElementById('products').scrollIntoView()">
-        تسوق الآن ←
-      </button>
+<div class="feature">
+<div class="icon">🚚</div>
+<h3>توصيل سريع</h3>
+<p>1 - 3 أيام عمل</p>
+</div>
 
-    </div>
+<div class="feature">
+<div class="icon">💳</div>
+<h3>طرق دفع آمنة</h3>
+<p>خيارات دفع متعددة</p>
+</div>
 
-  </section>
+</section>
 
+<section class="section" id="offers">
 
-  <!-- FEATURES -->
+<div class="section-title">
+<h2>🔥 عروض <span>مميزة</span></h2>
+</div>
 
-  <section class="features">
+<div class="products">
 
-    <div class="feature">
-      <div class="icon">🛡️</div>
-      <h3>منتجات أصلية</h3>
-      <p>ضمان على المنتجات</p>
-    </div>
+<div class="product"
+data-name="شاشة تلفزيون ذكية"
+data-category="الشاشات">
 
-    <div class="feature">
-      <div class="icon">🔧</div>
-      <h3>تركيب مجاني</h3>
-      <p>حسب المنتج</p>
-    </div>
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80">
+</div>
 
-    <div class="feature">
-      <div class="icon">🚚</div>
-      <h3>توصيل سريع</h3>
-      <p>1 - 3 أيام عمل</p>
-    </div>
+<div class="product-info">
 
-    <div class="feature">
-      <div class="icon">💳</div>
-      <h3>طرق دفع آمنة</h3>
-      <p>خيارات دفع متعددة</p>
-    </div>
+<h3>شاشة تلفزيون ذكية</h3>
 
-  </section>
+<div class="price">299 د.أ</div>
 
+<button class="add-cart"
+onclick="addProduct('شاشة تلفزيون ذكية',299)">
+🛒 أضف للسلة
+</button>
 
-  <!-- OFFERS -->
+</div>
+</div>
 
-  <section class="section" id="offers">
+</div>
+</section>
 
-    <div class="section-title">
+<section class="section" id="products">
 
-      <h2>
-        🔥 عروض <span>تجريبية</span>
-      </h2>
+<div class="section-title">
+<h2>الأكثر <span>مبيعاً</span></h2>
+</div>
 
-      <a href="#products" class="show-all">
-        عرض الكل ←
-      </a>
+<div class="products" id="productsList">
 
-    </div>
+<div class="product"
+data-name="سماعات لاسلكية"
+data-category="سماعات">
 
-  </section>
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80">
+</div>
 
+<div class="product-info">
+<h3>سماعات لاسلكية</h3>
+<div class="price">25 د.أ</div>
 
-  <!-- PRODUCTS -->
+<button class="add-cart"
+onclick="addProduct('سماعات لاسلكية',25)">
+🛒 أضف للسلة
+</button>
+</div>
 
-  <section class="section" id="products">
+</div>
 
-    <div class="section-title">
+<div class="product"
+data-name="شاشة تلفزيون ذكية"
+data-category="الشاشات">
 
-      <h2>
-        الأكثر <span>مبيعاً</span>
-      </h2>
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80">
+</div>
 
-    </div>
+<div class="product-info">
+<h3>شاشة تلفزيون ذكية</h3>
+<div class="price">299 د.أ</div>
 
+<button class="add-cart"
+onclick="addProduct('شاشة تلفزيون ذكية',299)">
+🛒 أضف للسلة
+</button>
+</div>
 
-    <div class="products" id="productsList">
+</div>
 
-      <!-- PRODUCT 1 -->
+<div class="product"
+data-name="غسالة أوتوماتيك"
+data-category="الغسالات">
 
-      <div class="product">
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80">
+</div>
 
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80">
-        </div>
+<div class="product-info">
+<h3>غسالة أوتوماتيك</h3>
+<div class="price">349 د.أ</div>
 
-        <div class="product-info">
+<button class="add-cart"
+onclick="addProduct('غسالة أوتوماتيك',349)">
+🛒 أضف للسلة
+</button>
+</div>
 
-          <h3>سماعات لاسلكية</h3>
+</div>
 
-          <div class="price">
-            25 د.أ
-          </div>
+<div class="product"
+data-name="ثلاجة منزلية"
+data-category="الثلاجات">
 
-          <button class="add-cart" onclick="addToCart()">
-            🛒 أضف للسلة
-          </button>
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80">
+</div>
 
-        </div>
+<div class="product-info">
+<h3>ثلاجة منزلية</h3>
+<div class="price">499 د.أ</div>
 
-      </div>
+<button class="add-cart"
+onclick="addProduct('ثلاجة منزلية',499)">
+🛒 أضف للسلة
+</button>
+</div>
 
+</div>
 
-      <!-- PRODUCT 2 -->
+<div class="product"
+data-name="مكيف هواء"
+data-category="المكيفات">
 
-      <div class="product">
+<div class="product-image">
+<img src="https://images.unsplash.com/photo-1631545806609-7f0e2c1c7c50?auto=format&fit=crop&w=600&q=80">
+</div>
 
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80">
-        </div>
+<div class="product-info">
+<h3>مكيف هواء</h3>
+<div class="price">450 د.أ</div>
 
-        <div class="product-info">
+<button class="add-cart"
+onclick="addProduct('مكيف هواء',450)">
+🛒 أضف للسلة
+</button>
+</div>
 
-          <h3>شاشة تلفزيون ذكية</h3>
+</div>
 
-          <div class="price">
-            299 د.أ
-          </div>
+</div>
 
-          <button class="add-cart" onclick="addToCart()">
-            🛒 أضف للسلة
-          </button>
+<div id="noResults" class="no-results">
+ما لقينا منتجات مطابقة للبحث 🔎
+</div>
 
-        </div>
+</section>
 
-      </div>
+<section class="section" id="categories">
 
+<div class="section-title">
+<h2>تسوق حسب <span>القسم</span></h2>
+</div>
 
-      <!-- PRODUCT 3 -->
+<div class="categories">
 
-      <div class="product">
+<div class="category" onclick="filterCategory('الثلاجات')">
+<div class="icon">🧊</div>
+<h3>الثلاجات</h3>
+</div>
 
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80">
-        </div>
+<div class="category" onclick="filterCategory('الغسالات')">
+<div class="icon">🧺</div>
+<h3>الغسالات</h3>
+</div>
 
-        <div class="product-info">
+<div class="category" onclick="filterCategory('الشاشات')">
+<div class="icon">📺</div>
+<h3>الشاشات</h3>
+</div>
 
-          <h3>غسالة أوتوماتيك</h3>
+<div class="category" onclick="filterCategory('المكيفات')">
+<div class="icon">❄️</div>
+<h3>المكيفات</h3>
+</div>
 
-          <div class="price">
-            349 د.أ
-          </div>
+</div>
 
-          <button class="add-cart" onclick="addToCart()">
-            🛒 أضف للسلة
-          </button>
+</section>
 
-        </div>
+<footer id="footer">
 
-      </div>
+<div class="footer-content">
 
+<div>
 
-      <!-- PRODUCT 4 -->
+<h2>
+ELECTRONICS <span>KINGDOM 👑</span>
+</h2>
 
-      <div class="product">
+<p>
+متجر أجهزة كهربائية منزلية.
+نوفر لكم مجموعة متنوعة من الأجهزة
+بأسعار منافسة وخدمة موثوقة.
+</p>
 
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80">
-        </div>
+</div>
 
-        <div class="product-info">
+<div>
 
-          <h3>ثلاجة منزلية</h3>
+<h3>روابط سريعة</h3>
 
-          <div class="price">
-            499 د.أ
-          </div>
+<ul>
 
-          <button class="add-cart" onclick="addToCart()">
-            🛒 أضف للسلة
-          </button>
+<li><a class="contact-link" href="#home">الرئيسية</a></li>
+<li><a class="contact-link" href="#products">جميع المنتجات</a></li>
+<li><a class="contact-link" href="#offers">العروض</a></li>
+<li><a class="contact-link" href="#categories">الأقسام</a></li>
 
-        </div>
+</ul>
 
-      </div>
+</div>
 
-    </div>
+<div>
 
-  </section>
+<h3>تواصل معنا</h3>
 
+<ul>
 
-  <!-- CATEGORIES -->
+<li>
+📞
+<a class="contact-link" href="tel:+962785000572">
+0785000572
+</a>
+</li>
 
-  <section class="section" id="categories">
+<li>
+💬
+<a
+class="contact-link whatsapp-link"
+id="footerWhatsapp"
+href="https://wa.me/962785000572"
+target="_blank">
+واتساب
+</a>
+</li>
 
-    <div class="section-title">
+<li>📍 الأردن</li>
 
-      <h2>
-        تسوق حسب <span>القسم</span>
-      </h2>
+</ul>
 
-    </div>
+</div>
 
+</div>
 
-    <div class="categories">
+<div class="copyright">
+Electronics Kingdom © 2026
+</div>
 
-      <div class="category">
-        <div class="icon">🧊</div>
-        <h3>الثلاجات</h3>
-      </div>
+</footer>
 
-      <div class="category">
-        <div class="icon">🧺</div>
-        <h3>الغسالات</h3>
-      </div>
+<a
+id="whatsappFloat"
+class="whatsapp-float"
+href="https://wa.me/962785000572"
+target="_blank">
+💬
+</a>
 
-      <div class="category">
-        <div class="icon">📺</div>
-        <h3>الشاشات</h3>
-      </div>
+<div class="modal" id="cartModal">
 
-      <div class="category">
-        <div class="icon">❄️</div>
-        <h3>المكيفات</h3>
-      </div>
+<div class="modal-box">
 
-    </div>
+<span class="close" onclick="closeCart()">×</span>
 
-  </section>
+<h2 class="modal-title">🛒 سلة المشتريات</h2>
 
+<div id="cartItems"></div>
 
-  <!-- FOOTER -->
+<div class="cart-total">
+المجموع:
+<span id="cartTotal">0</span> د.أ
+</div>
 
-  <footer id="footer">
+<button class="checkout-btn" onclick="openCheckout()">
+متابعة لإتمام الطلب
+</button>
 
-    <div class="footer-content">
+</div>
 
-      <div>
+</div>
 
-        <h2>
-          ELECTRONICS <span>KINGDOM 👑</span>
-        </h2>
+<div class="modal" id="checkoutModal">
 
-        <p>
-          متجر أجهزة كهربائية منزلية —
-          معلومات وأسعار المنتجات الحالية
-          في هذه النسخة التجريبية.
-        </p>
+<div class="modal-box">
 
-      </div>
+<span class="close" onclick="closeCheckout()">×</span>
 
+<h2 class="modal-title">📦 إتمام الطلب</h2>
 
-      <div>
+<div class="form-group">
+<label>الاسم الكامل</label>
+<input type="text" id="customerName" placeholder="اكتب اسمك">
+</div>
 
-        <h3>روابط سريعة</h3>
+<div class="form-group">
+<label>رقم الهاتف</label>
+<input type="tel" id="customerPhone" placeholder="07XXXXXXXX">
+</div>
 
-        <ul>
-          <li>الرئيسية</li>
-          <li>جميع المنتجات</li>
-          <li>العروض</li>
-          <li>الأقسام</li>
-        </ul>
+<div class="form-group">
+<label>العنوان</label>
+<textarea id="customerAddress" placeholder="المحافظة، المنطقة، الشارع، رقم البناية..."></textarea>
+</div>
 
-      </div>
+<div class="form-group">
+<label>ملاحظات إضافية</label>
+<textarea id="customerNotes" placeholder="مثلاً وقت مناسب للتوصيل..."></textarea>
+</div>
 
+<button class="checkout-btn" onclick="sendOrderWhatsApp()">
+📱 إرسال الطلب عبر واتساب
+</button>
 
-      <div>
+</div>
+</div>
 
-        <h3>تواصل معنا</h3>
+<script>
 
-        <ul>
-          <li>📞 07XXXXXXXX</li>
-          <li>💬 واتساب</li>
-          <li>📍 الأردن</li>
-        </ul>
+/* رقم واتساب المحل */
+const WHATSAPP_NUMBER = "962785000572";
 
-      </div>
+let cart = [];
 
-    </div>
+function addProduct(name,price){
 
+let existing = cart.find(item => item.name === name);
 
-    <div class="copyright">
-      Electronics Kingdom © 2026
-    </div>
+if(existing){
+existing.quantity++;
+}else{
+cart.push({
+name:name,
+price:price,
+quantity:1
+});
+}
 
-  </footer>
+updateCart();
 
+alert("تمت إضافة المنتج إلى السلة 🛒");
+}
 
-  <!-- JAVASCRIPT -->
+function updateCart(){
 
-  <script>
+let count = 0;
 
-    let cart = 0;
+cart.forEach(item => {
+count += item.quantity;
+});
 
-    function addToCart() {
+document.getElementById("cartCount").textContent = count;
 
-      cart++;
+renderCart();
+}
 
-      document.getElementById("cartCount").textContent = cart;
+function renderCart(){
 
-      alert("تمت إضافة المنتج إلى السلة 🛒");
+const container = document.getElementById("cartItems");
 
-    }
+if(cart.length === 0){
 
+container.innerHTML =
+'<div class="empty">السلة فارغة 🛒</div>';
 
-    function searchProducts() {
+document.getElementById("cartTotal").textContent = "0";
 
-      let input =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase();
+return;
+}
 
-      let products =
-        document.querySelectorAll(".product");
+let total = 0;
 
-      products.forEach(function(product) {
+container.innerHTML = "";
 
-        let name =
-          product.querySelector("h3")
-          .textContent
-          .toLowerCase();
+cart.forEach((item,index)=>{
 
-        if (name.includes(input)) {
-          product.style.display = "";
-        } else {
-          product.style.display = "none";
-        }
+let itemTotal = item.price * item.quantity;
 
-      });
+total += itemTotal;
 
-    }
+container.innerHTML += `
 
-  </script>
+<div class="cart-item">
+
+<div class="cart-item-info">
+
+<h4>${item.name}</h4>
+
+<div class="cart-item-price">
+${item.price} د.أ
+</div>
+
+</div>
+
+<div class="quantity">
+
+<button onclick="changeQuantity(${index},-1)">−</button>
+
+<span>${item.quantity}</span>
+
+<button onclick="changeQuantity(${index},1)">+</button>
+
+</div>
+
+<button class="remove"
+onclick="removeFromCart(${index})">
+حذف
+</button>
+
+</div>
+`;
+});
+
+document.getElementById("cartTotal").textContent = total;
+}
+
+function changeQuantity(index,amount){
+
+cart[index].quantity += amount;
+
+if(cart[index].quantity <= 0){
+cart.splice(index,1);
+}
+
+updateCart();
+}
+
+function removeFromCart(index){
+
+cart.splice(index,1);
+
+updateCart();
+}
+
+function openCart(){
+
+document.getElementById("cartModal").style.display="flex";
+
+renderCart();
+}
+
+function closeCart(){
+
+document.getElementById("cartModal").style.display="none";
+}
+
+function openCheckout(){
+
+if(cart.length === 0){
+
+alert("السلة فارغة، أضف منتج أولاً 🛒");
+
+return;
+}
+
+closeCart();
+
+document.getElementById("checkoutModal").style.display="flex";
+}
+
+function closeCheckout(){
+
+document.getElementById("checkoutModal").style.display="none";
+}
+
+function sendOrderWhatsApp(){
+
+let name =
+document.getElementById("customerName").value.trim();
+
+let phone =
+document.getElementById("customerPhone").value.trim();
+
+let address =
+document.getElementById("customerAddress").value.trim();
+
+let notes =
+document.getElementById("customerNotes").value.trim();
+
+if(!name || !phone || !address){
+
+alert("يرجى تعبئة الاسم ورقم الهاتف والعنوان.");
+
+return;
+}
+
+let message =
+"🛒 طلب جديد - Electronics Kingdom\n\n";
+
+message += "👤 الاسم: " + name + "\n";
+message += "📞 الهاتف: " + phone + "\n";
+message += "📍 العنوان: " + address + "\n";
+
+if(notes){
+message += "📝 الملاحظات: " + notes + "\n";
+}
+
+message += "\nالمنتجات:\n";
+
+let total = 0;
+
+cart.forEach(item=>{
+
+let itemTotal = item.price * item.quantity;
+
+total += itemTotal;
+
+message +=
+"• " +
+item.name +
+" × " +
+item.quantity +
+" = " +
+itemTotal +
+" د.أ\n";
+});
+
+message += "\n💰 المجموع: " + total + " د.أ";
+
+let url =
+"https://wa.me/" +
+WHATSAPP_NUMBER +
+"?text=" +
+encodeURIComponent(message);
+
+window.open(url,"_blank");
+}
+
+function normalizeArabic(text){
+
+return text
+.toLowerCase()
+.replace(/[أإآ]/g,"ا")
+.replace(/ة/g,"ه")
+.replace(/ى/g,"ي")
+.trim();
+}
+
+function searchProducts(){
+
+let input =
+normalizeArabic(
+document.getElementById("searchInput").value
+);
+
+let products =
+document.querySelectorAll("#productsList .product");
+
+let resultsBox =
+document.getElementById("searchResults");
+
+let visible = [];
+
+products.forEach(product=>{
+
+let name =
+normalizeArabic(
+product.getAttribute("data-name") || ""
+);
+
+if(!input){
+
+product.style.display="";
+
+}else if(name.includes(input)){
+
+product.style.display="";
+
+visible.push(product);
+
+}else{
+
+product.style.display="none";
+}
+
+});
+
+let noResults =
+document.getElementById("noResults");
+
+if(input && visible.length === 0){
+noResults.style.display="block";
+}else{
+noResults.style.display="none";
+}
+
+if(!input){
+
+resultsBox.style.display="none";
+
+return;
+}
+
+let allProducts = [];
+
+products.forEach(product=>{
+
+allProducts.push({
+name:product.getAttribute("data-name"),
+price:product.querySelector(".price").textContent
+});
+
+});
+
+let matches =
+allProducts.filter(item =>
+normalizeArabic(item.name).includes(input)
+);
+
+resultsBox.innerHTML="";
+
+matches
+.sort((a,b)=>{
+
+let aa=normalizeArabic(a.name);
+let bb=normalizeArabic(b.name);
+
+let aStarts=aa.startsWith(input);
+let bStarts=bb.startsWith(input);
+
+return Number(bStarts)-Number(aStarts);
+
+})
+.slice(0,6)
+.forEach(item=>{
+
+let div=document.createElement("div");
+
+div.className="search-item";
+
+div.innerHTML=`
+<span>${item.name}</span>
+<span class="search-price">${item.price}</span>
+`;
+
+div.onclick=function(){
+
+document.getElementById("searchInput").value=item.name;
+
+resultsBox.style.display="none";
+
+searchProducts();
+
+document.getElementById("products").scrollIntoView({
+behavior:"smooth"
+});
+};
+
+resultsBox.appendChild(div);
+});
+
+if(matches.length){
+resultsBox.style.display="block";
+}else{
+resultsBox.style.display="none";
+}
+}
+
+function filterCategory(category){
+
+let products =
+document.querySelectorAll("#productsList .product");
+
+let found=false;
+
+products.forEach(product=>{
+
+let productCategory =
+product.getAttribute("data-category");
+
+if(productCategory === category){
+
+product.style.display="";
+found=true;
+
+}else{
+
+product.style.display="none";
+}
+
+});
+
+document.getElementById("noResults").style.display =
+found ? "none" : "block";
+
+document.getElementById("products").scrollIntoView({
+behavior:"smooth"
+});
+}
+
+document.addEventListener("click",function(event){
+
+let search=document.querySelector(".search");
+
+if(!search.contains(event.target)){
+
+document.getElementById("searchResults").style.display="none";
+}
+});
+
+window.onclick=function(event){
+
+let cartModal=document.getElementById("cartModal");
+let checkoutModal=document.getElementById("checkoutModal");
+
+if(event.target === cartModal){
+closeCart();
+}
+
+if(event.target === checkoutModal){
+closeCheckout();
+}
+};
+
+</script>
 
 </body>
-</html>    
+</html>
