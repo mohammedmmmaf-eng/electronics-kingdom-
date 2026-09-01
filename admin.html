@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>لوحة تحكم - Electronics Kingdom</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Tahoma,sans-serif;
+  background:#f4f6f8;
+  color:#111827;
+}
+
+:root{
+  --dark:#07111d;
+  --gold:#f5aa13;
+  --white:#fff;
+  --gray:#6b7280;
+  --red:#dc2626;
+  --green:#16a34a;
+}
+
+header{
+  background:var(--dark);
+  color:white;
+  padding:25px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:bold;
+}
+
+.logo span{
+  color:var(--gold);
+}
+
+.owner{
+  color:#ddd;
+}
+
+.container{
+  max-width:1200px;
+  margin:40px auto;
+  padding:0 20px;
+}
+
+h1{
+  margin-bottom:30px;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-bottom:35px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.card h3{
+  color:var(--gray);
+  margin-bottom:12px;
+}
+
+.number{
+  font-size:35px;
+  font-weight:bold;
+  color:var(--gold);
+}
+
+.panel{
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  margin-bottom:30px;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.panel h2{
+  margin-bottom:25px;
+}
+
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+label{
+  font-weight:bold;
+}
+
+input,select{
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:16px;
+  outline:none;
+}
+
+input:focus,select:focus{
+  border-color:var(--gold);
+}
+
+button{
+  border:none;
+  padding:13px 20px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.add{
+  background:var(--gold);
+  color:var(--dark);
+  margin-top:10px;
+}
+
+.add:hover{
+  background:#ffbd25;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.product{
+  border:1px solid #eee;
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.product img{
+  width:100%;
+  height:180px;
+  object-fit:contain;
+  background:#f5f5f5;
+}
+
+.product-info{
+  padding:15px;
+}
+
+.product-info h3{
+  margin-bottom:10px;
+}
+
+.price{
+  color:var(--gold);
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+}
+
+.edit{
+  background:#e5e7eb;
+}
+
+.delete{
+  background:var(--red);
+  color:white;
+}
+
+.categories{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.category{
+  background:var(--dark);
+  color:white;
+  padding:12px 18px;
+  border-radius:10px;
+}
+
+.category button{
+  background:transparent;
+  color:#ff6b6b;
+  padding:0 5px;
+}
+
+.notice{
+  background:#fff7df;
+  border-right:5px solid var(--gold);
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:25px;
+  line-height:1.8;
+}
+
+@media(max-width:800px){
+  .dashboard{
+    grid-template-columns:1fr;
+  }
+
+  .products{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+}
+
+@media(max-width:550px){
+  .products{
+    grid-template-columns:1fr;
+  }
+
+  header{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    ELECTRONICS <span>KINGDOM 👑</span>
+  </div>
+
+  <div class="owner">
+    لوحة تحكم المالك
+  </div>
+</header>
+
+<div class="container">
+
+  <h1>مرحباً بك 👋</h1>
+
+  <div class="notice">
+    من هون بتقدر تتحكم بمنتجات متجرك وأسعارها وأقسامها.
+    <br>
+    <strong>النسخة الحالية للتجربة.</strong>
+  </div>
+
+  <!-- الإحصائيات -->
+
+  <div class="dashboard">
+
+    <div class="card">
+      <h3>عدد المنتجات</h3>
+      <div class="number" id="productCount">0</div>
+    </div>
+
+    <div class="card">
+      <h3>عدد الأقسام</h3>
+      <div class="number" id="categoryCount">0</div>
+    </div>
+
+    <div class="card">
+      <h3>الطلبات</h3>
+      <div class="number" id="orderCount">0</div>
+    </div>
+
+  </div>
+
+
+  <!-- إضافة منتج -->
+
+  <div class="panel">
+
+    <h2>➕ إضافة منتج جديد</h2>
+
+    <div class="form">
+
+      <div class="form-group">
+        <label>اسم المنتج</label>
+        <input id="productName" type="text"
+               placeholder="مثلاً: شاشة سامسونج 55 بوصة">
+      </div>
+
+      <div class="form-group">
+        <label>السعر</label>
+        <input id="productPrice" type="number"
+               placeholder="مثلاً: 399">
+      </div>
+
+      <div class="form-group">
+        <label>القسم</label>
+
+        <select id="productCategory">
+          <option value="الثلاجات">الثلاجات</option>
+          <option value="الغسالات">الغسالات</option>
+          <option value="الشاشات">الشاشات</option>
+          <option value="المكيفات">المكيفات</option>
+        </select>
+
+      </div>
+
+      <div class="form-group">
+        <label>رابط صورة المنتج</label>
+        <input id="productImage" type="text"
+               placeholder="ضع رابط صورة المنتج">
+      </div>
+
+      <div class="form-group full">
+
+        <button class="add" onclick="addProduct()">
+          ➕ إضافة المنتج
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- المنتجات -->
+
+  <div class="panel">
+
+    <h2>📦 المنتجات</h2>
+
+    <div class="products" id="productsList"></div>
+
+  </div>
+
+
+  <!-- الأقسام -->
+
+  <div class="panel">
+
+    <h2>🗂️ إدارة الأقسام</h2>
+
+    <div class="form">
+
+      <div class="form-group">
+        <label>اسم القسم الجديد</label>
+
+        <input
+          id="categoryName"
+          type="text"
+          placeholder="مثلاً: المكانس"
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <button
+          class="add"
+          onclick="addCategory()"
+        >
+          ➕ إضافة قسم
+        </button>
+
+      </div>
+
+    </div>
+
+    <br>
+
+    <div
+      class="categories"
+      id="categoriesList"
+    ></div>
+
+  </div>
+
+
+  <!-- الطلبات -->
+
+  <div class="panel">
+
+    <h2>🛒 الطلبات</h2>
+
+    <p>
+      قريباً من هون رح تقدر تشوف:
+      اسم الزبون، رقم الهاتف، العنوان، المنتجات،
+      المبلغ وحالة الطلب.
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   بيانات مؤقتة للتجربة
+========================= */
+
+let products = [
+  {
+    name:"سماعات لاسلكية",
+    price:25,
+    category:"إلكترونيات",
+    image:"https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80"
+  },
+
+  {
+    name:"شاشة تلفزيون ذكية",
+    price:299,
+    category:"الشاشات",
+    image:"https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=600&q=80"
+  },
+
+  {
+    name:"غسالة أوتوماتيك",
+    price:349,
+    category:"الغسالات",
+    image:"https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80"
+  },
+
+  {
+    name:"ثلاجة منزلية",
+    price:499,
+    category:"الثلاجات",
+    image:"https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80"
+  }
+];
+
+
+let categories = [
+  "الثلاجات",
+  "الغسالات",
+  "الشاشات",
+  "المكيفات"
+];
+
+
+/* =========================
+   عرض المنتجات
+========================= */
+
+function renderProducts(){
+
+  let list =
+    document.getElementById("productsList");
+
+  list.innerHTML="";
+
+  products.forEach(function(product,index){
+
+    list.innerHTML += `
+
+      <div class="product">
+
+        <img src="${product.image}">
+
+        <div class="product-info">
+
+          <h3>${product.name}</h3>
+
+          <div>
+            ${product.category}
+          </div>
+
+          <div class="price">
+            ${product.price} د.أ
+          </div>
+
+          <div class="actions">
+
+            <button
+              class="edit"
+              onclick="editProduct(${index})"
+            >
+              ✏️ تعديل
+            </button>
+
+            <button
+              class="delete"
+              onclick="deleteProduct(${index})"
+            >
+              🗑️ حذف
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document.getElementById("productCount")
+    .textContent = products.length;
+}
+
+
+/* =========================
+   إضافة منتج
+========================= */
+
+function addProduct(){
+
+  let name =
+    document.getElementById("productName").value;
+
+  let price =
+    document.getElementById("productPrice").value;
+
+  let category =
+    document.getElementById("productCategory").value;
+
+  let image =
+    document.getElementById("productImage").value;
+
+
+  if(!name || !price){
+
+    alert("اكتب اسم المنتج والسعر أولاً");
+
+    return;
+  }
+
+
+  products.push({
+
+    name:name,
+
+    price:Number(price),
+
+    category:category,
+
+    image:image ||
+    "https://via.placeholder.com/600x400?text=Product"
+
+  });
+
+
+  document.getElementById("productName").value="";
+  document.getElementById("productPrice").value="";
+  document.getElementById("productImage").value="";
+
+
+  renderProducts();
+
+  alert("تمت إضافة المنتج ✅");
+}
+
+
+/* =========================
+   تعديل منتج
+========================= */
+
+function editProduct(index){
+
+  let product=products[index];
+
+  let name=prompt(
+    "اسم المنتج:",
+    product.name
+  );
+
+  if(name===null) return;
+
+
+  let price=prompt(
+    "السعر:",
+    product.price
+  );
+
+  if(price===null) return;
+
+
+  let image=prompt(
+    "رابط الصورة:",
+    product.image
+  );
+
+  if(image===null) return;
+
+
+  product.name=name;
+
+  product.price=Number(price);
+
+  product.image=image;
+
+
+  renderProducts();
+
+  alert("تم تعديل المنتج ✅");
+}
+
+
+/* =========================
+   حذف منتج
+========================= */
+
+function deleteProduct(index){
+
+  if(
+    !confirm(
+      "متأكد إنك بدك تحذف هذا المنتج؟"
+    )
+  ){
+
+    return;
+  }
+
+
+  products.splice(index,1);
+
+  renderProducts();
+}
+
+
+/* =========================
+   الأقسام
+========================= */
+
+function renderCategories(){
+
+  let list =
+    document.getElementById("categoriesList");
+
+  list.innerHTML="";
+
+
+  categories.forEach(function(category,index){
+
+    list.innerHTML += `
+
+      <div class="category">
+
+        ${category}
+
+        <button
+          onclick="deleteCategory(${index})"
+        >
+          ✕
+        </button>
+
+      </div>
+
+    `;
+
+  });
+
+
+  document.getElementById("categoryCount")
+    .textContent=categories.length;
+}
+
+
+function addCategory(){
+
+  let name =
+    document.getElementById("categoryName").value.trim();
+
+
+  if(!name){
+
+    alert("اكتب اسم القسم");
+
+    return;
+  }
+
+
+  if(categories.includes(name)){
+
+    alert("هذا القسم موجود بالفعل");
+
+    return;
+  }
+
+
+  categories.push(name);
+
+
+  document.getElementById("categoryName").value="";
+
+
+  renderCategories();
+
+  alert("تمت إضافة القسم ✅");
+}
+
+
+function deleteCategory(index){
+
+  if(
+    confirm(
+      "متأكد إنك بدك تحذف القسم؟"
+    )
+  ){
+
+    categories.splice(index,1);
+
+    renderCategories();
+
+  }
+
+}
+
+
+/* =========================
+   تشغيل الصفحة
+========================= */
+
+renderProducts();
+
+renderCategories();
+
+document.getElementById("orderCount")
+  .textContent="0";
+
+</script>
+
+</body>
+</html>
